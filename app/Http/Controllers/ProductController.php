@@ -51,7 +51,6 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Produto atualizado com sucesso!');
     }
 
-    // Método destroy corrigido:
     public function destroy(Product $product)
     {
         $product->delete();
