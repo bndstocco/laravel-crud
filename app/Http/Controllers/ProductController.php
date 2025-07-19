@@ -31,7 +31,9 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Produto criado com sucesso!');
     }
-    public function edit(Products $products){
-        
+
+    public function edit(Product $product)
+    {
+        dd($product); // ou return view('products.edit', compact('product'));
     }
 }
