@@ -32,13 +32,11 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Produto criado com sucesso!');
     }
 
-    // ✅ Método edit corrigido:
     public function edit(Product $product)
     {
         return view('products.edit', ['product' => $product]);
     }
 
-    // ✅ Método update (recomendado adicionar)
     public function update(Request $request, Product $product)
     {
         $data = $request->validate([
@@ -51,5 +49,13 @@ class ProductController extends Controller
         $product->update($data);
 
         return redirect()->route('products.index')->with('success', 'Produto atualizado com sucesso!');
+    }
+
+    // Método destroy corrigido:
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Produto deletado com sucesso!');
     }
 }
