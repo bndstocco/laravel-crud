@@ -32,8 +32,24 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Produto criado com sucesso!');
     }
 
+    // ✅ Método edit corrigido:
     public function edit(Product $product)
     {
-        dd($product); // ou return view('products.edit', compact('product'));
+        return view('products.edit', ['product' => $product]);
+    }
+
+    // ✅ Método update (recomendado adicionar)
+    public function update(Request $request, Product $product)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'qty' => 'required|numeric',
+            'price' => 'required|numeric',
+            'description' => 'nullable|string',
+        ]);
+
+        $product->update($data);
+
+        return redirect()->route('products.index')->with('success', 'Produto atualizado com sucesso!');
     }
 }
