@@ -35,14 +35,25 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        ul {
+            color: red;
+            padding-left: 1.2rem;
+        }
     </style>
 </head>
 <body>
     <h1>Create a Product</h1>
+
+    @if($errors->any())
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     <form method="POST" action="{{ route('products.store') }}">
-
         @csrf
-
         <div>
             <label for="name">Name</label>
             <input id="name" type="text" name="name" placeholder="Name" required>
